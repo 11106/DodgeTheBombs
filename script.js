@@ -1,5 +1,5 @@
 var gameState = 0;
-
+var [xpos, xspeed,] = [640, 0,];
 function setup() { 
   createCanvas(1280,720);
 	background(0);
@@ -25,18 +25,18 @@ function draw() {
 function menu(){
 	background(0);
 	fill (255)
-	rect(320, 450, 200, 100);
-	fill(0)
-	text("Start", 410, 500)
-	//text("MENU", 620, 330);
-	//text("1. Menu", 620, 350);
-	//text("2. gameStart", 620, 370);
-	//text("3. gameOver", 620, 390);
+	text("MENU", 620, 330);
+	text("1. Menu", 620, 350);
+	text("2. Start", 620, 370);
+	text("3. Game Over", 620, 390);
 }
 
 function game(){
 	background(0);
 	text("Game has started!", 620, 360);
+  fill (255)
+	rect(xpos,690,15,30)
+  if (xpos >= 0 && xpos + 15 <= 1280) xpos += xspeed;
 }
 
 function gameOver(){
@@ -44,9 +44,24 @@ function gameOver(){
 	text("Game Over!", 620, 360); 
 }
 
-function keyPressed() {
 
-  if (keyCode == 49) {
+
+function keyPressed() {
+  switch (keyCode) {
+    case 37:
+      xspeed = -8;
+      break;
+    case 65:
+      xspeed = -4;
+      break;
+      
+    case 39:
+      xspeed = 8;
+      break;
+    case 68:
+      xspeed = 4;
+	}
+	if (keyCode == 49) {
     gameState = 0;
   }
 
@@ -57,4 +72,16 @@ function keyPressed() {
   if (keyCode == 51) {
     gameState = 2;
   }
+}
+
+function keyReleased() {
+  switch (keyCode) {
+    case 37:
+    case 65:
+      xspeed = 0;
+      break;
+    case 39:
+    case 68:
+      xspeed = 0
+	}
 }

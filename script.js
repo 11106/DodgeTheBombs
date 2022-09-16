@@ -1,4 +1,5 @@
 var gameState = 0;
+//var balls =[];
 var [xpos, xspeed,] = [640, 0,];
 function setup() { 
   createCanvas(1280,720);
@@ -36,15 +37,20 @@ function game(){
 	text("Game has started!", 620, 360);
   fill (255)
 	rect(xpos,690,15,30)
-  if (xpos >= 0 && xpos + 15 <= 1280) xpos += xspeed;
+  if (xpos >= 0 && xpos + 15 <= 1280) {
+		 xpos += xspeed;
+	}
+	if (xpos == 0){
+        xpos = 1
+  }
 }
+
+
 
 function gameOver(){
 	background(0);
 	text("Game Over!", 620, 360); 
 }
-
-
 
 function keyPressed() {
   switch (keyCode) {
@@ -82,6 +88,28 @@ function keyReleased() {
       break;
     case 39:
     case 68:
-      xspeed = 0
+      xspeed = 0;
 	}
 }
+
+	// class Ball{
+	// 	constructor(){
+	// 		this.x = random(width); 
+	// 		this.y = 0;		
+	// }
+
+	// 	draw(){
+	// 		background(0);
+	// 		circle(this.x, this.y, 30);
+	// 		this.y += 5;
+	// 	}
+	// }
+	
+	// 	draw()
+	// 		if(frameCount % 100 == 0){
+	// 			balls.push(new Ball());
+	// 		}
+
+	// 		balls.forEach((b) => {
+	// 			b.draw();
+	// 		})	

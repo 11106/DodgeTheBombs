@@ -1,9 +1,23 @@
 var gameState = 0;
-//var balls =[];
-var [xpos, xspeed,] = [640, 0,];
+var ball = [];
+
+class Ball{
+	
+	constructor(){
+		this.x = random(width); 
+		this.y = 0;	
+	}	
+
+	draw(){
+		circle(this.x, this.y, 30);
+		this.y += 5;
+	}
+}
+
 function setup() { 
-  createCanvas(1280,720);
+  createCanvas(1250,720);
 	background(0);
+	ball = new Ball();
 }
 
 function draw() {
@@ -26,47 +40,36 @@ function draw() {
 function menu(){
 	background(0);
 	fill (255)
-	text("MENU", 620, 330);
-	text("1. Menu", 620, 350);
-	text("2. Start", 620, 370);
-	text("3. Game Over", 620, 390);
+	text("MENU", 600, 330);
+	text("1. Menu", 600, 350);
+	text("2. Start", 600, 370);
+	text("3. Game Over", 600, 390);
+  //keyPressed_0()
 }
 
 function game(){
 	background(0);
-	text("Game has started!", 620, 360);
-  fill (255)
-	rect(xpos,690,15,30)
-  if (xpos >= 0 && xpos + 15 <= 1280) {
-		 xpos += xspeed;
+	text("Game has started!", 600, 360);
+
+	fill (255)
+	rect(mouseX,690,15,30)
+	
+	//ball.draw()
+
+	if (keyPressed == 80){
+		ball.draw(new Ball()); 
 	}
-	if (xpos == 0){
-        xpos = 1
-  }
-}
-
-
+}	
 
 function gameOver(){
 	background(0);
-	text("Game Over!", 620, 360); 
+	text("Game Over!", 600, 360); 
+  text("Do you want to play again?",560,375);
+  text("Y/N:",623,390);
+  keyPressed_1()
 }
 
-function keyPressed() {
-  switch (keyCode) {
-    case 37:
-      xspeed = -8;
-      break;
-    case 65:
-      xspeed = -4;
-      break;
-      
-    case 39:
-      xspeed = 8;
-      break;
-    case 68:
-      xspeed = 4;
-	}
+function keyPressed(){ //_0
 	if (keyCode == 49) {
     gameState = 0;
   }
@@ -79,37 +82,18 @@ function keyPressed() {
     gameState = 2;
   }
 }
-
-function keyReleased() {
-  switch (keyCode) {
-    case 37:
-    case 65:
-      xspeed = 0;
-      break;
-    case 39:
-    case 68:
-      xspeed = 0;
-	}
+function keyPressed_1(){
+if (keyCode == 89){
+    game()
+  }
+  if (keyCode == 78){
+    menu()
+  }
 }
+	// if(frameCount % 100 == 0){
+	// 	ball.push(new Ball());
+	// };
 
-	// class Ball{
-	// 	constructor(){
-	// 		this.x = random(width); 
-	// 		this.y = 0;		
-	// }
-
-	// 	draw(){
-	// 		background(0);
-	// 		circle(this.x, this.y, 30);
-	// 		this.y += 5;
-	// 	}
-	// }
-	
-	// 	draw()
-	// 		if(frameCount % 100 == 0){
-	// 			balls.push(new Ball());
-	// 		}
-
-	// 		balls.forEach((b) => {
-	// 			b.draw();
-	// 		})	
+	// ball.forEach((b) => {
+	// 	b.draw();			
+	// });

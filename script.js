@@ -11,11 +11,19 @@ class Ball{
 	}	
 
 	draw(){
-		circle(this.x, this.y, 30);
+		circle(this.x, this.y, 50);
 		this.y = this.y + this.vy
 	}
 }
 
+function checkCollision(){
+	if (this.y > 660){
+		if (this.x > mouseX && this.x < mouseX) {
+			fill("red");
+		}
+	}
+}
+	
 function setup() { 
   createCanvas(1250,720);
 	background(0);
@@ -52,13 +60,10 @@ var lastSpawn = 0;
 
 function game(){
 	background(0);
-	text("Game has started!", 600, 360);
-
 	fill (255)
-	rect(mouseX,690,15,30);
+	rect(mouseX, 660, 30, 60);
 	
-	
-	if(performance.now() - lastSpawn > 500){
+	if(performance.now() - lastSpawn > 500 ){
 		lastSpawn = performance.now()
 		balls.push(new Ball(1,1))
 		console.log("spawned")
@@ -66,6 +71,7 @@ function game(){
 
 	balls.forEach((b) => {
 		b.draw();
+		checkCollision();
 	})
 }	
 

@@ -1,23 +1,24 @@
-var gameState = 0;
-var ball = [];
+var gameState = 1;
+var ball;
+var balls = [];
 
 class Ball{
 	
-	constructor(){
+	constructor(x, y){
 		this.x = random(width); 
 		this.y = 0;	
+		this.vy = 5
 	}	
 
 	draw(){
 		circle(this.x, this.y, 30);
-		this.y += 5;
+		this.y = this.y + this.vy
 	}
 }
 
 function setup() { 
   createCanvas(1250,720);
 	background(0);
-	ball = new Ball();
 }
 
 function draw() {
@@ -44,21 +45,28 @@ function menu(){
 	text("1. Menu", 600, 350);
 	text("2. Start", 600, 370);
 	text("3. Game Over", 600, 390);
-  //keyPressed_0()
+  //keyPressed_0();
 }
+
+var lastSpawn = 0;
 
 function game(){
 	background(0);
 	text("Game has started!", 600, 360);
 
 	fill (255)
-	rect(mouseX,690,15,30)
+	rect(mouseX,690,15,30);
 	
-	//ball.draw()
+	
+	if(performance.now() - lastSpawn > 500){
+		lastSpawn = performance.now()
+		balls.push(new Ball(1,1))
+		console.log("spawned")
+	};
 
-	if (keyPressed == 80){
-		ball.draw(new Ball()); 
-	}
+	balls.forEach((b) => {
+		b.draw();
+	})
 }	
 
 function gameOver(){
@@ -66,7 +74,7 @@ function gameOver(){
 	text("Game Over!", 600, 360); 
   text("Do you want to play again?",560,375);
   text("Y/N:",623,390);
-  keyPressed_1()
+  keyPressed_1();
 }
 
 function keyPressed(){ //_0
@@ -84,16 +92,9 @@ function keyPressed(){ //_0
 }
 function keyPressed_1(){
 if (keyCode == 89){
-    game()
+    game();
   }
   if (keyCode == 78){
-    menu()
+    menu();
   }
 }
-	// if(frameCount % 100 == 0){
-	// 	ball.push(new Ball());
-	// };
-
-	// ball.forEach((b) => {
-	// 	b.draw();			
-	// });

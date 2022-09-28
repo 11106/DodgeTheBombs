@@ -1,9 +1,4 @@
-# p5.js
+Dit is ons spelletje, 
 
-This is the Template Repl for p5.js.
-
-p5.js is a JavaScript library for creative coding, with a focus on making coding accessible and inclusive for artists, designers, educators, beginners, and anyone else! p5.js is free and open-source because we believe software, and the tools to learn it, should be accessible to everyone.
-
-[Check out the official docs here](https://p5js.org/reference/).
-
-
+Het doel is om de bommen die uit de lucht vallen te ontwijken en een zo hoog mogelijke score behalen door zo lang mogelijk te overleven.
+Je hebt geen levens, na 1 keer geraakt te zijn ben je dood. Je kan wel oneindig opniew proberen :)

@@ -1,4 +1,4 @@
-var gameState = 1;
+var gameState = 0;
 var ball;
 var balls = [];
 
@@ -14,16 +14,18 @@ class Ball{
 		circle(this.x, this.y, 50);
 		this.y = this.y + this.vy
 	}
-}
 
-function checkCollision(){
-	if (this.y > 660){
-		if (this.x > mouseX && this.x < mouseX) {
-			fill("red");
+	checkCollision(){
+		if (this.y > 635){
+			if (this.x < mouseX + 30 && this.x > mouseX - 30 ) {
+				gameState = 2;
+				let idx = balls.indexOf(this);
+				balls.splice(idx, 1);
+			}
 		}
 	}
 }
-	
+
 function setup() { 
   createCanvas(1250,720);
 	background(0);
@@ -71,7 +73,7 @@ function game(){
 
 	balls.forEach((b) => {
 		b.draw();
-		checkCollision();
+		b.checkCollision();
 	})
 }	
 

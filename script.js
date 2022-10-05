@@ -16,7 +16,7 @@ class Ball{
 	}
 
 	checkCollision(){
-		if (this.y > 635){
+		if (this.y > 635 && this.y < 695){
 			if (this.x - 25 < mouseX + 30 && this.x + 25 > mouseX ) {
 				gameState = 2;
 				let idx = balls.indexOf(this);

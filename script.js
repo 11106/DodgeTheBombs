@@ -9,11 +9,17 @@ class Ball{
 	constructor(x, y){
 		this.x = random(width); 
 		this.y = 0;	
-		this.vy = 5
+		this.vy = 2.5
+    
+    
+
+		if(score > 10){
+			this.vy = score / 4
+		}
 	}	
 
 	draw(){
-		circle(this.x, this.y, 50);
+		image(bomb,this.x - 25, this.y - 25, 50);
 		this.y = this.y + this.vy
 	}
 
@@ -28,6 +34,14 @@ class Ball{
 	}
 }
 
+let img; 
+function preload(){
+  bomb = loadImage('Sprites/bomb.png');
+  menu_bg = loadImage('Sprites/Backgrounds/Menu_BG.jpg');
+  game_bg = loadImage('Sprites/Backgrounds/Game_BG.jpg');
+	player = loadImage ('Sprites/Player.png')
+	game_over_bg = loadImage('Sprites/Backgrounds/GAME_OVER_BG.jpg');
+}
 function setup() { 
   createCanvas(1250,720);
 	background(0);
@@ -48,20 +62,20 @@ function draw() {
 }
 
 function menu(){
-	background(0);
+	background(menu_bg);
 	fill (255);
 	text("MENU", 600, 330);
 	text("1. Menu", 600, 350);
 	text("2. Start", 600, 370);
 	text("3. Game Over", 600, 390);
-	score = 0
+	score = 1
   keyPressed_0();
 }
 
 var lastSpawn = 0;
 
 function game(){
-	background(0);
+	background(game_bg);
 
 	text (score, 200, 200);
 	if(frameCount % 60 == 0){
@@ -69,9 +83,7 @@ function game(){
 		console.log (score);
 	}
 	
-	
-	fill (255)
-	rect(mouseX, 660, 30, 60);
+	image(player, mouseX, 660, 30, 60);
 	
 	if(frameCount % 15 == 0){
 		balls.push(new Ball(1,1))
@@ -84,7 +96,7 @@ function game(){
 }	
 
 function gameOver(){
-	background(0);
+	background(game_over_bg);
 	text("Game Over!", 600, 360); 
   text("Press enter to",595,390);
   text("return to the menu",583,405);
